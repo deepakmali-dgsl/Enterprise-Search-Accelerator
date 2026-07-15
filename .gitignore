@@ -1,0 +1,29 @@
+# Node
+node_modules/
+
+# Environment
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Next.js
+.next/
+
+# Coverage
+coverage/
+
+# Build
+dist/
+build/
+
+# Misc
+*.swp
