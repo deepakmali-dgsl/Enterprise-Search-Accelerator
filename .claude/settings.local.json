@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/deepakmali/web/enterprise-search-accelerator log --oneline -20)",
+      "Bash(cp /private/tmp/claude-502/-Users-deepakmali-web-enterprise-search-accelerator/c68f1992-9691-4d75-8c49-14e906646fdc/scratchpad/inspect.js ./__inspect_tmp.js)",
+      "Bash(node __inspect_tmp.js)",
+      "Bash(rm -f __inspect_tmp.js)",
+      "Bash(node -e \"console.log\\(new Intl.DisplayNames\\(['en'], {type:'region'}\\).of\\('IN'\\)\\); console.log\\(new Intl.DisplayNames\\(['en'], {type:'region'}\\).of\\('GB'\\)\\);\")"
+    ]
+  }
+}

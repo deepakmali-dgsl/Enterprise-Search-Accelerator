@@ -8,6 +8,52 @@ function getIndexName() {
   return process.env.ALGOLIA_INDEX_NAME;
 }
 
+function getClientDemoIndexName() {
+  if (!process.env.ALGOLIA_CLIENT_DEMO_INDEX_NAME) {
+    throw new Error("ALGOLIA_CLIENT_DEMO_INDEX_NAME is not configured.");
+  }
+
+  return process.env.ALGOLIA_CLIENT_DEMO_INDEX_NAME;
+}
+
+/**
+ * Saves records to an arbitrary Algolia index. Used by sync flows that
+ * target an index other than the default ALGOLIA_INDEX_NAME, e.g. the
+ * client-demo index, without changing the existing saveObjects() behavior.
+ *
+ * @param {string} indexName - Target Algolia index.
+ * @param {Record<string, unknown>[]} records - Algolia search records.
+ * @returns {Promise<unknown>} Algolia write task response.
+ */
+async function saveObjectsToIndex(indexName, records) {
+  if (!Array.isArray(records) || records.length === 0) {
+    return null;
+  }
+
+  return client.saveObjects({ indexName, objects: records });
+}
+
+/**
+ * Clears all objects from an arbitrary Algolia index.
+ *
+ * @param {string} indexName - Target Algolia index.
+ * @returns {Promise<unknown>} Algolia clear task response.
+ */
+async function clearIndexByName(indexName) {
+  return client.clearObjects({ indexName });
+}
+
+/**
+ * Applies index settings to an arbitrary Algolia index.
+ *
+ * @param {string} indexName - Target Algolia index.
+ * @param {Record<string, unknown>} indexSettings - Algolia index settings.
+ * @returns {Promise<unknown>} Algolia settings task response.
+ */
+async function setIndexSettings(indexName, indexSettings) {
+  return client.setSettings({ indexName, indexSettings });
+}
+
 /**
  * Saves records to Algolia. Matching objectIDs are updated, making this
  * operation idempotent.
@@ -74,4 +120,8 @@ module.exports = {
   updateObject,
   deleteObject,
   clearIndex,
+  getClientDemoIndexName,
+  saveObjectsToIndex,
+  clearIndexByName,
+  setIndexSettings,
 };

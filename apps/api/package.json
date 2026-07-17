@@ -4,6 +4,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "sync:client-demo": "node syncClientDemo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
